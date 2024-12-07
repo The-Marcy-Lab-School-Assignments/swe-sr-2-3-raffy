@@ -7,7 +7,7 @@ For guidance on setting up and submitting this assignment, refer to the Marcy la
 What are the main differences between Flexbox and Grid layouts? Describe scenarios where each layout system would be more suitable.
 
 ### Response 1
-Generally, both **flexbox** and **grid** are useful in simplifying the process of creating responsive web layouts. Without the two, web developers will have to manually specify specific media-query breakpoints to account for resizing browser windows (or different device resolutions/sizes).
+Generally, both **flexbox** and **grid** are useful in simplifying the process of creating responsive web layouts. Without the two, web developers will have to manually specify media-query breakpoints to account for resizing browser windows (or different device resolutions/sizes).
 
 While you could achieve the same functionality/layout by using either **flexbox** or **grid**, a general rule of thumb is that if you don't have a specific layout in mind, styling using **flexboxes** is the way to go (for both simplicity and time to implement). **Grid** layouts are very powerful for when you want a responsive design but still retain some control in visual arrangement.
 
@@ -142,69 +142,79 @@ Describe the difference between `grid-template-areas` and `grid-template-columns
 `grid-template-columns` and `grid-template-rows` are the two primary CSS properties that you start with when defining a grid structure. The former allows you to specify the width of individual columns, separated by a space.
 
 ```css
-/* setting up a grid with two columns:
-   the first column with a width of 50px
-   the second column with a width of 1rem
-*/
+/* 
+ * setting up a grid with two columns:
+ * the first column with a width of 50px
+ * the second column with a width of 1rem
+ */
 grid-template-columns: 50px 1rem;
 ```
-![demo-1](/public/demo-1.png)
+
+<div align="center">
+  <img src="public/demo-1.png" alt="demo-1" width="40%"/>
+</div>
 
 CSS also allows a neat shortcut for when you want to have a lot of columns that are of the same width.
 
 ```css
-/* sets up a grid of 5 columns:
-   1fr means that they all have the same width proportionate to each other
-   and would occupy the full space of their container!
-*/
+/* 
+ * sets up a grid of 5 columns:
+ * 1fr means that they all have the same width proportionate to each other
+ * and would occupy the full space of their container!
+ */
 grid-template-columns: repeat(5, 1fr);
 ```
-![demo-2](/public/demo-2.png)
+
+<div align="center">
+  <img src="public/demo-2.png" alt="demo-2" width="80%"/>
+</div>
 
 `grid-template-rows` serve the same purpose but for horizontal rows instead. Using both in conjuction with each other allows for a strict definition of a grid-pattern.
 
 ```css
-/* sets up a 4x3 grid (4 rows, 3 columns)
-   all of height and width of 2rem.
-*/
+/* 
+ * sets up a 4x3 grid (4 rows, 3 columns)
+ * all of height and width of 2rem.
+ */
 grid-template-rows: repeat(4, 2rem);
 grid-template-columns: repeat(3, 2rem);
 ```
-![demo-3.png](/public/demo-3.png)
 
-To add a layer of customization, grid then allows the use of `grid-template-columns` in order to create areas of varying sizes in a grid structure. Using the same template from above, here is an example of how you could define areas in CSS grid:
+<div align="center">
+  <img src="public/demo-3.png" alt="demo-3" width="40%"/>
+</div>
+
+To add a layer of customization, CSS grid then allows the use of `grid-template-areas` in order to create areas of varying sizes in a grid structure. Using the same template from above, here is an example of how you could define areas in CSS grid:
 
 ```css
-/* sets up a 4x3 grid (4 rows, 3 columns)
-   all of height and width of 2rem.
-*/
+/* 
+ * sets up a 4x3 grid (4 rows, 3 columns)
+ * all of height and width of 2rem.
+ */
 grid-template-rows: repeat(4, 2rem);
 grid-template-columns: repeat(3, 2rem);
-/* splits up the 4x3 grid into 10 areas! */
+/* splits up the 4x3 grid into 5 (arbitrarily) named areas! */
 grid-template-areas:
   "one one two"
   "three four four"
   "three four four"
-  "six eight nine"
-  "seven eight ten"
+  "five five five"
 ;
 ```
-But that won't work right away. When using `grid-template-areas` you would also have to define an additional property for the children elements in order to match your defined areas above into them!
+But that won't work right away. When using `grid-template-areas` you would also have to define an additional property for the children elements in order to match your defined areas above into them! The possible values of `grid-area` should match the named areas in the `grid-template-areas` property of the parent.
 ```css
-/* assuming that you have divs whose id is 'item<number>' */
+/* assuming that you have children divs whose ids are 'item<number>' */
 #item1 { grid-area: one; background-color: #a6cee3 }
 #item2 { grid-area: two; background-color: #1f78b4 }
 #item3 { grid-area: three; background-color: #b2df8a }
 #item4 { grid-area: four; background-color: #33a02c }
 #item5 { grid-area: five; background-color: #fb9a99 }
-#item6 { grid-area: six; background-color: #e31a1c }
-#item7 { grid-area: seven; background-color: #fdbf6f }
-#item8 { grid-area: eight; background-color: #ff7f00 }
-#item9 { grid-area: nine; background-color: #cab2d6 }
-#item10 { grid-area: ten; background-color: #6a3d9a }
 ```
 Then you get this custom grid with varying element sizes:
-![demo-4.png](/public/demo-4.png)
+
+<div align="center">
+  <img src="public/demo-4.png" alt="demo-4" width="40%"/>
+</div>
 
 
 ## Prompt 4
@@ -212,7 +222,7 @@ Then you get this custom grid with varying element sizes:
 Explain the `min-width` and `max-width` keywords in media queries. How do they help create responsive breakpoints for different screen sizes?
 
 ### Response 4
-`min-width` and `max-width` both make it possible for CSS to detect and redefine itself depending on the viewport's size. Both of these properties act as thresholds which will detect and apply the changes defined inside of them whenever that condition is crossed. A `min-width` media query will apply the changes whenever the viewport is equal or more than the specified value, while `max-width` applies changes when the viewport is equal or less in size.
+`min-width` and `max-width` both make it possible for CSS to detect and redefine itself depending on the viewport's size. Both of these properties act as thresholds which will monitor and apply the changes defined inside of them whenever that condition is crossed. A `min-width` media query will apply the changes whenever the viewport is equal or more than the specified value, while `max-width` applies changes when the viewport is equal or less in size.
 
 ## Prompt 5
 
